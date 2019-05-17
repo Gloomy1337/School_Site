@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -11,7 +15,7 @@
 
 		<!--Menu-->
 		<ul>
-			<li><a href="Home.html">Home</a></li>
+			<li><a href="index.php">Home</a></li>
 			<li><a href="Albums.html">Albums</a></li>
 			<li><a href="Members.html">Band</a></li>
 			<li><a href="Media.html">Media</a></li>
@@ -22,8 +26,20 @@
 			
 			<li><a href="Store.html">Store</a></li>
 			-->
-			<li style="float:right"><a href="Login.php">Log In</a></li>
-			<li style="float:right"><a href="Signup.php">Sign up</a></li>
+			<?php
+             if(!isset($_SESSION['username']))
+    {
+        
+        echo '<li style="float:right"><a href="login.php">Login</a></li>';
+    }
+    else
+    {
+        $creator = $_SESSION['username'];
+        echo '<li style="float:right"><a href="logout.php">Logout '.$creator.'</a></li>';
+
+    }
+	?>		
+			<li style="float:right"><a href="registration.php">Sign up</a></li>
 			<li style="float:right"><a href="https://www.facebook.com/linkinpark/" class="facebook"><i class="fa fa-facebook"></i></a> 
 			<li style="float:right"><a href="https://twitter.com/linkinpark?lang=el" class="twitter"><i class="fa fa-twitter"></i></a> 
 			<li style="float:right"><a href="https://www.youtube.com/channel/UCZU9T1ceaOgwfLRq7OKFU4Q" class="youtube"><i class="fa fa-youtube"></i></a> 
@@ -46,7 +62,7 @@
 		<div class="row">
 			<div class="column">
 				<!--Store image-->
-				<a href="Store.html"><img src="Eikones/Store.jpg" class="corners"></a>
+				<a href="store.php"><img src="Eikones/Store.jpg" class="corners"></a>
 			</div>
 			<div class="column">
 				<!--Album image-->
@@ -70,7 +86,7 @@
 		<div class="footer-left">
 
 			<p class="footer-links">
-				<a href="Home.html">Home</a>
+				<a href="index.php">Home</a>
 				·
 				<a href="Albums.html">Albums</a>
 				·
