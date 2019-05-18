@@ -105,7 +105,16 @@ include "storescripts/connect_to_mysql.php";
 	$expmonth = $_GET['expmonth'];
 	$expyear = $_GET['expyear'];
 	$cvv = $_GET['cvv'];
+	$cartTotal = $_GET['cartTotal'];
+    $idName = $_GET['idName'];
+	$productsID = $_GET['products_id'];
 	// Database Connection code
+	$servernameP = "localhost";
+	$usernameP = "id9602275_storefortest";
+	$passwordP = "12345";
+	$dbnameP = "id9602275_store";
+    $conProducts = mysqli_connect($servernameP,$usernameP,$passwordP,$dbnameP);  
+
 	$servername = "localhost";
 	$username = "id9590280_login";
 	$password = "12345";
@@ -115,30 +124,30 @@ include "storescripts/connect_to_mysql.php";
 	{
 		die("Error : ".mysqli_connect_error());
 	}
+	        
 
-		$sql = "INSERT INTO `orders`(`firstname`, `email`, `address`, `city`,`state`,`zip`,`cardname`,`cardnumber`,`expmonth`,`expyear`,`cvv` ) VALUES('$name','$email','$address','$city','$state','$zip','$cardname','$cardname','$expmonth','$expyear','$cvv');";
+		$sql = "INSERT INTO `orders`(`firstname`, `email`, `address`, `city`,`state`,`zip`,`cardname`,`cardnumber`,`expmonth`,`expyear`,`cvv`,`cost`,`itemsid`,`buyer`) VALUES('$name','$email','$address','$city','$state','$zip','$cardname','$cardname','$expmonth','$expyear','$cvv','$cartTotal','$productsID','$idName');";
 		if(mysqli_query($con,$sql))
 		{
-		    $query = "SELECT * FROM products ORDER BY id ASC ";
-            $result = mysqli_query($con,$query);
-        if(mysqli_num_rows($result) > 0) {
-            	while($row = mysqli_fetch_array($result)){ 
-                 $id = $row["id"];
-            	}
-            $sql = "UPDATE products SET quantity= 2 WHERE id=$id";
-			mysqli_query($con,$sql);
+		    $productsID = rtrim($productsID, ",");
+		    $id_str_array = explode(",", $productsID);
+		    foreach ($id_str_array as $key => $value) {
+    
+	        $id_quantity_pair = explode("-", $value); // Uses Hyphen(-) as delimiter to separate product ID from its quantity
+        	$product_id = $id_quantity_pair[0]; // Get the product ID
+        	$product_quantity = $id_quantity_pair[1]; // Get the quantity
+        	$sql = mysqli_query($conProducts,"UPDATE products SET quantity = quantity - '$product_quantity' WHERE id='$product_id' LIMIT 1");
+
+            //$product_price = $product_price * $product_quantity;
+        //	$fullAmount = $fullAmount + $product_price;
+		}
+           // $sql = "UPDATE products SET quantity= quantity -1 WHERE id= $id";
+			//mysqli_query($conProducts,$sql);
         echo "<script type='text/javascript'> $(window).load(function(){ $('#myModal').modal('show'); }); </script>";
-        
-
-
-		}
-		else
-		{
-			echo "<script type='text/javascript'> $(window).load(function(){ $('#myModalFail').modal('show'); }); </script>";
-		}
 
 
 }
+
 	
 	mysqli_close($con);
 ?>
@@ -154,10 +163,11 @@ include "storescripts/connect_to_mysql.php";
 				<div class="icon-box">
 					<i class="material-icons">&#xE876;</i>
 				</div>				
-				<h4 class="modal-title">Awesome!</h4>	
+				<h4 class="modal-title">Awesome!</h4></br>
+				<h4 class ="text-center">Your total cost: <?php echo $cartTotal; ?></h4>
 			</div>
 			<div class="modal-body">
-				<p class="text-center">Your order has been confirmed. Check your email for details.</p>
+				<p class="text-center"><h4><?php echo $idName; ?></br></h4></br> Your order has been confirmed. Check your email for details.</p>
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
@@ -168,7 +178,8 @@ include "storescripts/connect_to_mysql.php";
 
 <div class="text-center">
 	<!-- Button HTML (to Trigger Modal) -->
-	<h4><a href="index.php">Click to return to the Store</a></h4>
+	
+	<h4><a href="store.php">Click to return to the Store</a></h4>
 </div>
 </body>
 </html>  

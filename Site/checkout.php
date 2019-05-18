@@ -89,6 +89,7 @@ if (isset($_POST['index_to_remove']) && $_POST['index_to_remove'] != "") {
 }
 ?>
 <?php 
+error_reporting(E_ERROR | E_PARSE);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //       Section 5  (render the cart for the user to view on the page)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -115,7 +116,7 @@ if (!isset($_SESSION["cart_array"]) || count($_SESSION["cart_array"]) < 1) {
 			$details = $row["details"];
 		}
 		$pricetotal = $price * $each_item['quantity'];
-		$cartTotal =  $pricetotal ;
+		$cartTotal =  $cartTotal + $pricetotal ;
 		setlocale(LC_MONETARY, "en_US");
         $pricetotal = money_format("%10.2n", $pricetotal);
 		// Dynamic Checkout Btn Assembly
@@ -207,22 +208,22 @@ if (!isset($_SESSION["cart_array"]) || count($_SESSION["cart_array"]) < 1) {
   </div>
             <h3>Billing Address</h3>
             <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+            <input type="text" id="fname" name="firstname" placeholder="John M. Doe" required="required">
             <label for="email"><i class="fa fa-envelope"></i> Email</label>
-            <input type="text" id="email" name="email" placeholder="john@example.com">
+            <input type="text" id="email" name="email" placeholder="john@example.com" required="required">
             <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required="required">
             <label for="city"><i class="fa fa-institution"></i> City</label>
-            <input type="text" id="city" name="city" placeholder="New York">
+            <input type="text" id="city" name="city" placeholder="New York" required="required">
 
             <div class="row">
               <div class="col-50">
                 <label for="state">State</label>
-                <input type="text" id="state" name="state" placeholder="NY">
+                <input type="text" id="state" name="state" placeholder="NY" required="required">
               </div>
               <div class="col-50">
                 <label for="zip">Zip</label>
-                <input type="text" id="zip" name="zip" placeholder="10001">
+                <input type="text" id="zip" name="zip" placeholder="10001" required="required">
               </div>
             </div>
           </div>
@@ -237,11 +238,14 @@ if (!isset($_SESSION["cart_array"]) || count($_SESSION["cart_array"]) < 1) {
               <i class="fa fa-cc-discover" style="color:orange;"></i>
             </div>
             <label for="cname">Name on Card</label>
-            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+            <input type="text" id="cname" name="cardname" placeholder="John More Doe" required="required">
             <label for="ccnum">Credit card number</label>
-            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required="required">
             <label for="expmonth">Exp Month</label>
-            <input type="text" id="expmonth" name="expmonth" placeholder="September">
+            <input type="text" id="expmonth" name="expmonth" placeholder="September" required="required">
+            <input type="hidden" name="cartTotal" value="<?= $cartTotal; ?>">
+            <input type="hidden" name="products_id" value="<?= $product_id_array ?>">
+            <input type="hidden" name="idName" value="<?php echo $_SESSION["username"] ?>">
 
             <div class="row">
               <div class="col-50">

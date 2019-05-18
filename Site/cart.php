@@ -88,6 +88,7 @@ if (isset($_POST['index_to_remove']) && $_POST['index_to_remove'] != "") {
 }
 ?>
 <?php 
+error_reporting(E_ERROR | E_PARSE);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //       Section 5  (render the cart for the user to view on the page)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,7 +115,7 @@ if (!isset($_SESSION["cart_array"]) || count($_SESSION["cart_array"]) < 1) {
 			$details = $row["details"];
 		}
 		$pricetotal = $price * $each_item['quantity'];
-		$cartTotal = $pricetotal;
+		$cartTotal = $cartTotal + $pricetotal;
 		setlocale(LC_MONETARY, "en_US");
         $pricetotal = money_format("%10.2n", $pricetotal);
 		// Dynamic Checkout Btn Assembly

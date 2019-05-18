@@ -4,8 +4,16 @@ body,td,th {
 	color: #333;
 	line-height:1.5em;
 }
-body {
+body, php {
 	background-color: #FFF;
+	background-image: url("../store/groupLK_blur.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+body, html{
+	height: 100%;
 }
 a {
 	font-size: 14px;
@@ -14,10 +22,10 @@ a {
 a:link {
 	text-decoration: none;
 }
-a:visited {
-	text-decoration: none;
-	color: #03F;
-}
+a:link {color:#ff0000;}
+a:visited {color:#0000ff;}
+a:hover {font-size:120%;}
+
 a:hover {
 	text-decoration: none;
 	color: #000;
@@ -27,22 +35,62 @@ a:active {
 	color: #03F;
 }
 #pageHeader {
+    font-style: italic;
 	border:#999 1px solid;
 	border-bottom:none;
-	background-color:#F4F4F4;
+	background-color: #b7e3e8;
 	width:900px;
 	
 }
 #pageContent {
 	border:#999 1px solid;
 	border-bottom:none;
-	background-color:#F4F4F4;
+	background-color:#b7e3e8;
 	width:900px;
 
 }
 #pageFooter {
 	border:#999 1px solid;
-	background-color:#F4F4F4;
+	background-color:#b7e3e8;
 	width:900px;
 	
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+td, th {
+  width: 4rem;
+  height: 2rem;
+  text-align: center;
+}
+th {
+  background: lightblue;
+  border-color: white;
+}
+body {
+  padding: 1rem;
 }

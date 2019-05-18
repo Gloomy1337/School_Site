@@ -1,8 +1,4 @@
 <?php 
-// This file is www.developphp.com curriculum material
-// Written by Adam Khoury January 01, 2011
-// http://www.youtube.com/view_play_list?p=442E340A42191003
-// Script Error Reporting
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 session_start();
@@ -26,14 +22,22 @@ $result = mysqli_query($con,$query);
 			 $price = $row["price"];
 			 $date_added = strftime("%b %d, %Y", strtotime($row["dateAdded"]));
 			 $quantity = $row["quantity"];
+			 
+			 if($quantity <= 0){
+			     $q = "OUT OF STOCK";
+			 }else
+			 {
+			     $q = $quantity;
+			 }
 			 $dynamicList .= '<table width="100%" border="0" cellspacing="0" cellpadding="6">
+			 
         <tr>
           <td width="17%" valign="top"><a href="product.php?id=' . $id . '"><img style="border:#666 1px solid;" src="store/test' . $id . '.jpg" alt="' . $product_name . '" width="77" height="102" border="1" /></a></td>
           <td width="83%" valign="top">' . $product_name . '<br />
             $' . $price . '<br />
             <a href="product.php?id=' . $id . '">View Product Details</a></td>
             <br />
-            <td width="83%" valign="top">'.$quantity. '<br/>
+            <td width="83%" valign="top">'.$q.'<br/>
         </tr>
       </table>';
       $_SESSION['id'] = $id;
@@ -56,15 +60,15 @@ mysqli_close($con);
   <div id="pageContent">
   <table width="100%" border="0" cellspacing="0" cellpadding="10">
   <tr>
-    <td width="32%" valign="top"><h3>that guy</h3>
-      <p><img src="store/testtest.jpg" alt="Logo" width="300" height="400" border="0" /></td>
+    <td width="32%" valign="top"><h3>Linkin Park Eyes T-Shirt (available in the future)</h3>
+      <p><img src="store/merch.jpg" alt="Logo" width="300" height="400" border="0" /></td>
     <td width="35%" valign="top"><h3>Latest Designer Fashions</h3>
       <p><?php echo $dynamicList; ?><br />
         </p>
       <p><br />
       </p></td>
-    <td width="33%" valign="top"><h3>same guy</h3>
-      <p><img src="store/testtest.jpg" alt="Logo" width="300" height="400" border="0" /></p></td>
+    <td width="33%" valign="top"><h3>Linkin Park Eyes T-Shirt (available in the future)</h3>
+      <p><img src="store/merch2.jpg" alt="Logo" width="300" height="400" border="0" /></p></td>
   </tr>
 </table>
 
