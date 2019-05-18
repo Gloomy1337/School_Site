@@ -19,7 +19,7 @@ ob_start();
         $num = mysqli_num_rows($testresult);
         
     if($num == 1){
-        echo "username already taken";
+        echo "<script type='text/javascript'>alert('Username already exists!!')</script>";
     }else{
         if($password == $password2){
             $sql = "INSERT INTO users (name, lname, email, password, confpassword) VALUES('$username','$lastname','$email','$password','$password2')";
@@ -27,11 +27,11 @@ ob_start();
              
             $_SESSION['message'] = "Your account has created";
             $_SESSION['username'] = $username;
-
             header("location:index.php");
+            
            echo "<script type='text/javascript'> $(window).load(function(){ $('#myModal').modal('show'); }); </script>";
         }else{
-           echo "The passwords doesnt match";
+           echo "<script type='text/javascript'>alert('The passwords doesnt match !!')</script>";
         }
     }
 }

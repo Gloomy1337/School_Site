@@ -95,21 +95,39 @@ li a:hover:not(.active) {
 
 
 
-.img-with-text {
+.img-text {
+    transition: 1s;
+    Color:White;
+    position: relative;
     text-align: justify;
     width: 100%;
 }
 
-.img-with-text img {
+.img-text img {
+    Color:White;
+    position: relative;
     display: block;
-    margin: 0 auto;
+    margin: 10 auto;
+}
+.img-text img {
+	transition: 2s;
+	padding: 15px;
+	width: 400px;
+}
+
+.img-text img:hover {
+	filter: graysccale(100%);
+	transform: scale(1.3);
+    opacity: 1;
 }
 
 h1{
+    Color:White;
 	text-align:center;
 }
 
 h2{
+    Color:White;
 	text-align:center;
 	position: relative;
 	bottom: 20px;

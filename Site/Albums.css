@@ -107,10 +107,12 @@ li a:hover:not(.active) {
 }
 
 h1{
+    color:white;
 	text-align:center;
 }
 
 h2{
+    color:white;
 	text-align:center;
 }
 

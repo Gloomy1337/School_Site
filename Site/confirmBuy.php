@@ -125,8 +125,8 @@ include "storescripts/connect_to_mysql.php";
             	while($row = mysqli_fetch_array($result)){ 
                  $id = $row["id"];
             	}
-            
-			
+            $sql = "UPDATE products SET quantity= 2 WHERE id=$id";
+			mysqli_query($con,$sql);
         echo "<script type='text/javascript'> $(window).load(function(){ $('#myModal').modal('show'); }); </script>";
         
 
@@ -168,7 +168,7 @@ include "storescripts/connect_to_mysql.php";
 
 <div class="text-center">
 	<!-- Button HTML (to Trigger Modal) -->
-	<a href="index.php">Click to return to the Store</a>
+	<h4><a href="index.php">Click to return to the Store</a></h4>
 </div>
 </body>
 </html>  

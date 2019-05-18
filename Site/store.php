@@ -36,6 +36,7 @@ $result = mysqli_query($con,$query);
             <td width="83%" valign="top">'.$quantity. '<br/>
         </tr>
       </table>';
+      $_SESSION['id'] = $id;
     }
 } else {
 	$dynamicList = "We have no products listed in our store yet";

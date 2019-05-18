@@ -23,7 +23,7 @@ session_start();
             
            //echo "<script type='text/javascript'> $(window).load(function(){ $('#myModal').modal('show'); }); </script>";
         }else{
-            echo "Wrong Username or password Please try again";
+            echo "<script type='text/javascript'>alert('Wrong password try again!')</script>";
            header("location:login.php");
         }
 
